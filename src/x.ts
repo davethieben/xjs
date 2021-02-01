@@ -120,7 +120,7 @@ export interface Window
 
             for (let index = 0; index < params.length; index++)
             {
-                params[index] = tryConvert(params[index]);
+                params[index] = tryConvert(params[index], args);
             }
 
             return {
