@@ -142,6 +142,7 @@ export interface Window
 
         const directives = new Array<Directive>(
             {   // x-toggle="cssClass" 
+                // x-toggle="on(shown.bs.collapse,hidden.bs.collapse) select(.show-filter-btn) shown"
                 selector: "[x-toggle]",
                 get: "getAttribute(x-toggle)",
                 attach: "click",
@@ -149,6 +150,8 @@ export interface Window
                 {
                     return () =>
                     {
+                        const parts = expr.match(/(([^(])+(\([^)]+\))?)*/);
+
                         let value = !getData(element, expr);
                         setData(element, expr, value);
 
@@ -176,6 +179,8 @@ export interface Window
                 }
             });
 
+        // this only accounts for DOM elements present when the page loads. how to handle dynamically added elements, 
+        // such as in a AJAX load?
         for (const d of directives)
         {
             for (const element of select(d.selector))
