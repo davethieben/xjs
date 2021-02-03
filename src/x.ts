@@ -47,7 +47,7 @@ export interface Window
     x: X;
 }
 
-((window: Window) =>
+(function(window: Window)
 {
     function ctor({ select, extend, getData, setData, addClass, removeClass }: ConstructorArgs): X
     {
@@ -213,5 +213,6 @@ export interface Window
     {
         throw new Error("currently only jQuery is supported");
     }
+
 })(this);
 

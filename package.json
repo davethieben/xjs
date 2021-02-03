@@ -1,15 +1,19 @@
 {
-  "name": "xjs",
+  "name": "x",
   "version": "1.0.0",
   "description": "minimal ui framework",
-  "scripts": {},
   "author": "Dave Thieben",
   "license": "MIT",
+  "main": "src/index.html",
   "dependencies": {
     "jquery": "^3.5.1"
   },
   "devDependencies": {
     "@types/jquery": "^3.5.5",
+    "tsc": "^1.20150623.0",
     "typescript": "^4.1.3"
+  },
+  "scripts": {
+    "build": "tsc"
   }
 }

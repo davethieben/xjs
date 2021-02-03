@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta httpequiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1.00001,viewport-fit=cover" />
+    <title>x</title>
+    <style>
+        #root, body, html {
+            height: 100%;
+            margin: 0;
+            min-height: 100%;
+            padding: 0;
+            -webkit-overflow-scrolling: touch;
+            width: 100%;
+        }
+
+        #root {
+            display: flex;
+            flex: 1;
+            flex-shrink: 0;
+            flex-basis: auto;
+            flex-grow: 1;
+        }
+
+        html {
+            height: 100%;
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            font-family: "Segoe UI","-apple-system",BlinkMacSystemFont,Roboto,"Helvetica Neue",Helvetica,Ubuntu,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+            font-size: .875rem;
+            margin: 0;
+            -moz-osx-font-smoothing: grayscale;
+            -ms-overflow-style: scrollbar;
+            overflow-y: auto;
+            overscroll-behavior-y: none;
+            padding: 20px;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        * {
+            box-sizing: inherit;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        input, select, textarea, button {
+            color: inherit;
+            font-family: inherit;
+            font-size: inherit;
+        }
+
+        ul {
+            padding: 0;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            margin: 0;
+            padding: 8px 0;
+        }
+
+        h2, h3 {
+            border-top: solid 1px #D3D3D3;
+        }
+
+        p {
+            margin: 0.5rem 0;
+        }
+
+        code {
+            background-color: #D3D3D3;
+            display: block;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+        }
+
+        .example {
+            padding-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>x.js lib</h1>
+    <h2>examples</h2>
+
+    <div class="example">
+        <h3>toggle</h3>
+
+        <p>
+            <code>
+                &lt;button x-toggle=&quot;basic&quot;&gt;basic toggle&lt;/button&gt;
+            </code>
+            <button x-toggle="basic">basic toggle</button>
+        </p>
+
+        <p>
+            <button x-toggle="on(scroll) evented">evented toggle</button>
+        </p>
+
+        <p>
+            <button x-toggle="select(.another) another">toggle another</button>
+
+            <div class="another">another</div>
+        </p>
+
+    </div>
+
+    <script src="jquery.js"></script>
+    <script src="x.js"></script>
+</body>
+</html>
