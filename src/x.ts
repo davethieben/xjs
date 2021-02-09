@@ -23,6 +23,7 @@ export interface ConstructorArgs
     extend(target: any, ...objectN: any[]): any;
     getData(element: HTMLElement, key?: string): any | undefined;
     setData(element: HTMLElement, key: string, value: any | undefined): any;
+    hasClass(element: HTMLElement, classes: string): boolean;
     addClass(element: HTMLElement, classes: string): void;
     removeClass(element: HTMLElement, classes: string): void;
 }
@@ -47,9 +48,29 @@ export interface Window
     x: X;
 }
 
+class Defer
+{
+    constructor()
+    {
+        this.resolve = function() { };
+        this.reject = function() { };
+
+        this._p = new Promise((resolve, reject) =>
+        {
+            this.resolve = resolve;
+            this.reject = reject;
+        });
+    }
+
+    then(onSuccess, onError)
+    {
+        this._p.then(onSuccess, onError);
+    }
+}
+
 (function(window: Window)
 {
-    function ctor({ select, extend, getData, setData, addClass, removeClass }: ConstructorArgs): X
+    function ctor({ select, extend, hasClass, addClass, removeClass }: ConstructorArgs): X
     {
         const x = <T = any>(additionalState: (T | Array<T>)): X =>
         {
@@ -67,6 +88,8 @@ export interface Window
 
         function tryConvert(val: any, args?: any[] | any): any
         {
+            val = (val || "").trim();
+
             if (val.indexOf && val.indexOf("'") === 0)
             {
                 return val.substr(1, val.length - 2);
@@ -109,7 +132,7 @@ export interface Window
             if (!stringInput || !stringInput.length)
                 throw new Error("input expression is required");
 
-            const parts = stringInput.split("(");
+            const parts = stringInput.trim().split("(");
             const func = parts[0];
 
             let params = [];
@@ -152,9 +175,7 @@ export interface Window
                     {
                         const parts = expr.match(/(([^(])+(\([^)]+\))?)*/);
 
-                        let value = !getData(element, expr);
-                        setData(element, expr, value);
-
+                        let value = !hasClass(element, expr);
                         if (value)
                             addClass(element, expr);
                         else
@@ -210,6 +231,7 @@ export interface Window
             extend: jQuery.extend,
             getData: (e, k) => jQuery(e).data(k),
             setData: (e, k, v) => jQuery(e).data(k, v),
+            hasClass: (e, s) => jQuery(e).hasClass(s),
             addClass: (e, s) => jQuery(e).addClass(s),
             removeClass: (e, s) => jQuery(e).removeClass(s)
         });
